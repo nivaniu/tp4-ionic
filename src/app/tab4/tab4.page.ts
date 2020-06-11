@@ -4,15 +4,16 @@ import {Router} from '@angular/router';
 import {toTitleCase} from 'codelyzer/util/utils';
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  selector: 'app-tab4',
+  templateUrl: 'tab4.page.html',
+  styleUrls: ['tab4.page.scss']
 })
-export class Tab2Page {
+export class Tab4Page {
   private name: string;
 
   constructor(private camera: Camera, private router: Router) {
     const urls: string[] = router.url.split('/');
-    this.name =  toTitleCase(urls[urls.length - 1]);
+    this.name =  toTitleCase(urls[urls.length - 1].replace('_', ' '));
   }
+
 }

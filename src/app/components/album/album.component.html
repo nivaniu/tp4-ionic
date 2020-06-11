@@ -1,0 +1,23 @@
+<ion-list *ngIf="rawPage===Page.ALBUM">
+<ion-card *ngFor="let img of appImages">
+  <ion-card-content>
+          <ion-grid >
+            <ion-row>
+              <ion-col>
+                <img [src]="img.data64Image" [alt]="img.description">
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                {{'Longitude: '+img.getLng()+' Latitude: '+img.getLat()}}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                {{img.description}}
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+  </ion-card-content>
+</ion-card>
+</ion-list>

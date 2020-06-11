@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Page} from '../enums/pages/page.enum';
 
 @Component({
   selector: 'app-tabs',
@@ -6,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['tabs.page.scss']
 })
 export class TabsPage {
-
+private Page = Page;
   constructor() {}
 
 }
