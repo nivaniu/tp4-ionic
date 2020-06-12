@@ -10,6 +10,7 @@ import {PhotoComponent} from '../components/photo/photo.component';
 import {AlbumComponent} from '../components/album/album.component';
 import {LocalisationComponent} from '../components/localisation/localisation.component';
 import {SuperLocalisationComponent} from '../components/super-localisation/super-localisation.component';
+import {LongPressModule} from 'ionic-long-press';
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import {SuperLocalisationComponent} from '../components/super-localisation/super
         FormsModule,
         ExploreContainerComponentModule,
         Tab1PageRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        LongPressModule
     ],
     exports: [
         LocalisationComponent

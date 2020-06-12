@@ -1,5 +1,5 @@
 <ion-list *ngIf="rawPage===Page.ALBUM">
-<ion-card *ngFor="let img of appImages">
+<ion-card *ngFor="let img of appImages" ion-long-press (longPressed)="sendMail(img)">
   <ion-card-content>
           <ion-grid >
             <ion-row>

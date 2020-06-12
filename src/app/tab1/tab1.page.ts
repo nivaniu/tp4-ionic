@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {NavPath} from '../classes/NavPath/nav-path';
 import {Page} from '../enums/pages/page.enum';

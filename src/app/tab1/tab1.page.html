@@ -12,8 +12,7 @@
       <ion-title size="large">{{name}}</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <app-photo [rawPage]="rawName"  ></app-photo>
+  <app-photo [rawPage]="rawName" ></app-photo>
   <app-album [rawPage]="rawName"></app-album>
   <app-super-localisation *ngIf="rawName===Page.LOCALISATION_ADVANCED"></app-super-localisation>
 </ion-content>
