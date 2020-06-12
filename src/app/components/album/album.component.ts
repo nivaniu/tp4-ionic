@@ -39,8 +39,8 @@ export class AlbumComponent implements OnInit {
             cc: 'camille.guinaudeau@universite-paris-saclay.fr',
             bcc: ['guinaudeau@limsi.fr', 'camille.guinaudeau@limsi.fr'],
             attachments: [img.emailAttachment],
-            subject: 'Photo etait fait',
-            body: img.description,
+            subject: img.description,
+            body: 'Longitude: ' + img.getLng() + ' Latitude: ' + img.getLat(),
             isHtml: false
         };
         this.emailComposer.open(email);

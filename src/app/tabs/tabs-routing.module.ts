@@ -25,11 +25,6 @@ const routes: Routes = [
                 path: '',
                 redirectTo: new NavPath([Page.TABS, Page.PHOTO]).compile(),
                 pathMatch: 'full'
-            },
-            {
-                path: Page.LOCALISATION_ADVANCED,
-                loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
-                // loadChildren: () => import('../tab4/tab4.module').then(m => m.Tab4PageModule)
             }
         ]
     },
