@@ -3,6 +3,11 @@ import {Environment, GoogleMap, GoogleMaps, GoogleMapsMapTypeId} from '@ionic-na
 import {Google} from '../../enums/google/google.enum';
 import {Platform} from '@ionic/angular';
 import {EventService} from '../../services/events/event.service';
+import {NavigationEnd, Router} from '@angular/router';
+import {AppImage} from '../../classes/AppImage/app-image';
+import {AppCords} from '../../classes/AppGeolocation/app-cords';
+import {NavPath} from '../../classes/NavPath/nav-path';
+import {Page} from '../../enums/pages/page.enum';
 
 @Component({
     selector: 'app-localisation',
@@ -11,23 +16,48 @@ import {EventService} from '../../services/events/event.service';
 })
 export class LocalisationComponent implements OnInit {
     map: GoogleMap;
-
-    constructor(private platform: Platform, eventsService: EventService) {
+    cordsSet: Array<AppCords> = [];
+    constructor(private platform: Platform, eventsService: EventService, private router: Router) {
         if (this.platform.is('cordova')) {
-            this.loadMap();
-            eventsService.getAppImages().forEach((img) => {
-                this.map.addMarkerSync({
-                    title: img.description,
-                    icon: 'red',
-                    animation: 'DROP',
-                    position: {
-                        lat: img.getLat(),
-                        lng: img.getLng()
+            this.router.events.subscribe((e) => {
+                if (e instanceof NavigationEnd) {
+                    const navPath = new NavPath(router.url.split('/'));
+                    if (navPath.getRawLastPageName() === Page.LOCALISATION_STANDARD) {
+                        this.map = null;
+                        this.loadMap();
+                        this.cordsSet = [];
+                        eventsService.getAppImages().forEach((img: AppImage) => {
+                            this.setMarker(img);
+                        });
                     }
-                });
+                }
             });
         }
-        console.log('localisation Constr');
+    }
+
+    private setMarker(img: AppImage) {
+        if (img == null) {
+            return;
+        }
+        const cordsToSet: AppCords = new AppCords(img.getLat(), img.getLng());
+        // To avoid superposition of markers, i adjust a little bit it's coordinates
+        // If i'll have time i'll add a MarkCluster to handle this kind of problem
+        this.cordsSet.forEach((cords) => {
+            if (cordsToSet.lat === cords.lat && cordsToSet.lon === cords.lon) {
+                cordsToSet.lat += 0.000005;
+            }
+        });
+        this.cordsSet.push(cordsToSet);
+        this.map.addMarkerSync({
+            title: img.description,
+            icon: 'red',
+            animation: 'DROP',
+            position: {
+                lat: cordsToSet.lat,
+                lng: cordsToSet.lon
+            }
+        });
+
     }
 
     ngOnInit() {
